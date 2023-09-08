@@ -6,7 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "commitlint": "commitlint --edit"
+    "commitlint": "commitlint --edit",
+    "stylelint": "stylelint **/*.{vue,css,less,scss} --fix",
+    "prettier": "prettier --write"
   },
   "dependencies": {
     "core-js": "^3.8.3",
@@ -28,6 +30,13 @@
     "eslint-plugin-vue": "^8.0.3",
     "less": "^4.0.0",
     "less-loader": "^8.0.0",
+    "lint-staged": "^14.0.1",
+    "stylelint": "^15.10.3",
+    "stylelint-config-recess-order": "^4.3.0",
+    "stylelint-config-standard": "^34.0.0",
+    "stylelint-config-standard-less": "^2.0.0",
+    "stylelint-config-standard-scss": "^11.0.0",
+    "stylelint-config-standard-vue": "^1.0.0",
     "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
@@ -55,6 +64,54 @@
     ]
   },
   "gitHooks": {
+    "pre-commit": "npx lint-staged",
     "commit-msg": "npm run commitlint"
+  },
+  "lint-staged": {
+    "**/*.{vue,css,less,scss}": "npm run stylelint",
+    "**/*.{vue,js,jsx,ts,tsx}": "npm run lint",
+    "**/*.{vue,js,jsx,ts,tsx,md,html,css,less,scss}": "npm run prettier"
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard",
+      "stylelint-config-recess-order"
+    ],
+    "ignoreFiles": [
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.tsx",
+      "**/*.ts",
+      "**/*.json"
+    ],
+    "overrides": [
+      {
+        "extends": [
+          "stylelint-config-standard-less"
+        ],
+        "files": [
+          "*.less",
+          "**/*.less"
+        ]
+      },
+      {
+        "extends": [
+          "stylelint-config-standard-scss"
+        ],
+        "files": [
+          "*.scss",
+          "**/*.scss"
+        ]
+      },
+      {
+        "extends": [
+          "stylelint-config-standard-vue"
+        ],
+        "files": [
+          "*.vue",
+          "**/*.vue"
+        ]
+      }
+    ]
   }
 }
