@@ -91,6 +91,12 @@ See [stylelint-config-html](https://github.com/ota-meshi/stylelint-config-html)
 4. 优先级第四文本属性
 5. 优先级第五 css3 中新增属性
 
+### 绕过校验
+
+```
+git commit --no-verify -m "xxxxxx"
+```
+
 ### blog
 
 https://juejin.cn/post/7103889661465985038
